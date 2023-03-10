@@ -28,14 +28,13 @@ function printBooks(books) {
         button.title = book.title;
         button.author = book.author;
         button.available = book.borrowed;
-        button.pages = book.pages
         li.id = book.id;
         li.innerText = book.title;
         bookList.appendChild(li);
         bookList.appendChild(button);
         bookList.appendChild(borrowBook);
         
-        checkIfBookIsBorrowed(book);
+        checkIfBorrowed(book);
 
         button.addEventListener("click, bookInfo");
         borrowBook.addEventListener("click", changeToBorrowed);
