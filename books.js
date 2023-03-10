@@ -49,3 +49,19 @@ function printBooks(books) {
     })
 }
 
+function changeToBorrowed(e) {
+    let bookId = {bookId:e.currentTarget.id};
+    console.log(bookId);
+
+    fetch(`http://localhost:3000/library/borrowed`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",        
+        },
+        body: JSON.stringify(bookId)        
+    })
+    .then(data => {
+        updateBookList(data);
+    });
+}
+
