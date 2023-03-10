@@ -37,7 +37,7 @@ function printBooks(books) {
         
         checkIfBookIsBorrowed(book);
 
-        button.addEventListener("click, showBookInfo");
+        button.addEventListener("click, bookInfo");
         borrowBook.addEventListener("click", changeToBorrowed);
 
         if (book.borrowed) {
@@ -73,4 +73,26 @@ function checkIfBorrowed(book) {
     } else {
         pElement.innerText = "Boken finns tillgänglig"
     }
+}
+
+function bookInfo(e){
+    let bookTitle = e.currentTarget.title;
+    let bookAuthor = e.currentTarget.author;
+    let bookId = e.currentTarget.id;
+    let bookAvailable = e.currentTarget.borrowed;
+
+    fetch(`http://localhost:3000/library/${bookId}`)
+    .then(res => res.json())
+    .then(data => {
+    //console.log(data); 
+    printBooks(data);
+    });
+
+    const container = document.querySelector('.bookInfo');
+    container.innerHTML = `<h2>more information about chosen book</h2>
+    <p class="info">Title: ${bookTitle}</p>
+    <p class="info">Author: ${bookAuthor}</p>
+    <p class="info">Available: ${bookAvailable}</p>`
+    ;
+    updateBookList();
 }
