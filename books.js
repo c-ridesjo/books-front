@@ -65,3 +65,12 @@ function changeToBorrowed(e) {
     });
 }
 
+function checkIfBorrowed(book) {
+    const pElement = document.createElement("p");
+    bookList.appendChild(pElement);
+    if (book.borrowed) {
+        pElement.innerText = "Boken är utlånad"
+    } else {
+        pElement.innerText = "Boken finns tillgänglig"
+    }
+}
