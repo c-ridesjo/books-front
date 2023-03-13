@@ -2,6 +2,7 @@ const addNewBook = document.querySelector(".addNewBook");
 addNewBook.addEventListener("click", addBookToLibrary);
 
 function addBookToLibrary() {
+    
     const divElement = document.createElement("div");
     divElement.classList.add("addBook");
     document.body.appendChild(divElement);
@@ -11,6 +12,7 @@ function addBookToLibrary() {
 
     const title = document.createElement("p");
     const author = document.createElement("p");
+    const pages = document.createElement("p");
 
     title.innerText = "Title";
     const titleInput = document.createElement("input")
@@ -22,6 +24,11 @@ function addBookToLibrary() {
     formElement.appendChild(author);
     author.appendChild(authorInput);
 
+    pages.innerText = "Antal sidor";
+    const pagesInput = document.createElement("input")
+    formElement.appendChild(pages);
+    pages.appendChild(pagesInput);
+
     const addNewBookBtn = document.createElement("button");
     addNewBookBtn.innerText = "Lägg till boken ";
     formElement.appendChild(addNewBookBtn);
@@ -30,7 +37,8 @@ function addBookToLibrary() {
         e.preventDefault(addNewBookBtn);
         let book = {
             title: titleInput.value,
-            author: authorInput.value
+            author: authorInput.value,
+            pages: pagesInput.value
         }
         console.log(book);
 

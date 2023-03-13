@@ -1,15 +1,16 @@
-let bookTitle = document.querySelector("bookTitle");
-let bookBorrowed = document.querySelector("bookBorrowed");
-let showIfBorrowed = document.querySelector("showIfBorrowed");
-let bookList = document.querySelector("bookList");
+let bookTitle = document.querySelector(".bookTitle");
+let bookBorrowed = document.querySelector(".bookBorrowed");
+let showIfBorrowed = document.querySelector(".showIfBorrowed");
+let bookList = document.querySelector(".bookList");
 
 function updateBookList() {
     fetch("http://localhost:3000/library")
     .then(res => res.json())
     .then(data => {
-        //console.log(data); 
+        console.log(data); 
         printBooks(data);
-    });
+    })
+    .catch(err => console.log("err", err));
 }
 
 updateBookList();
@@ -18,16 +19,18 @@ function printBooks(books) {
     bookList.innerHTML = "";
 
     books.map(book => {
+        console.log("book", book);
         const li = document.createElement("li");
         const button = document.createElement("button");
         const borrowBook = document.createElement("button");   
         borrowBook.id = book.id;
         borrowBook.borrowed = book.borrowed;
-        button.innerText = "Mer info";
+        button.innerText = "More info";
         button.id = book.id;
         button.title = book.title;
         button.author = book.author;
         button.available = book.borrowed;
+        button.pages = book.pages;
         li.id = book.id;
         li.innerText = book.title;
         bookList.appendChild(li);
@@ -36,7 +39,7 @@ function printBooks(books) {
         
         checkIfBorrowed(book);
 
-        button.addEventListener("click, bookInfo");
+        button.addEventListener("click", bookInfo);
         borrowBook.addEventListener("click", changeToBorrowed);
 
         if (book.borrowed) {
@@ -77,6 +80,7 @@ function checkIfBorrowed(book) {
 function bookInfo(e){
     let bookTitle = e.currentTarget.title;
     let bookAuthor = e.currentTarget.author;
+    let bookPages = e.currentTarget.pages;
     let bookId = e.currentTarget.id;
     let bookAvailable = e.currentTarget.borrowed;
 
@@ -91,6 +95,7 @@ function bookInfo(e){
     container.innerHTML = `<h2>more information about chosen book</h2>
     <p class="info">Title: ${bookTitle}</p>
     <p class="info">Author: ${bookAuthor}</p>
+    <p class="info">Pages: ${bookPages}</p>
     <p class="info">Available: ${bookAvailable}</p>`
     ;
     updateBookList();

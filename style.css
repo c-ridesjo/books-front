@@ -1,6 +1,13 @@
 .addBook {
     width: 2rem;
     height: 1rem;
-    background-color: coral;
     color: black;
+}
+
+p {
+    color: darkblue;
+}
+
+button {
+    background-color: lightblue;
 }
